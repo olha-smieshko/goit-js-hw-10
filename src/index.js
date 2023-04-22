@@ -1,7 +1,15 @@
 import './css/styles.css';
-import elements from './js/elements';
 import { fetchCountries } from './js/fetchCountries';
-import {clearListInfo} from './js/commons';
+import Notiflix from 'notiflix';
+import elements from './js/elements';
+import { CountryListMarkup, InfoMarkup, clearListInfo } from "./js/commons";
+
+Notiflix.Notify.init({
+    width: '280px',
+    position: 'center-top',
+    opacity: 1,
+    timeout: 1500,
+  });
 
 var debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
@@ -13,5 +21,20 @@ function onInputEl() {
       clearListInfo();
       return; 
     }
-    fetchCountries(elements.inputEl.value.trim());
+    fetchCountries(elements.inputEl.value.trim())
+    .then(data => {
+      if (data.length === 1) {
+          clearListInfo();
+          elements.countryList.insertAdjacentHTML('beforeend', InfoMarkup(data));
+      } else if (data.length >= 2 && data.length <= 10) {
+          clearListInfo();
+          elements.countryList.insertAdjacentHTML('beforeend', CountryListMarkup(data));
+      } else {
+          clearListInfo();
+          Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+      }        
+    })
+    .catch(error => {
+      Notiflix.Notify.failure('Oops, there is no country with that name');
+    });
 }

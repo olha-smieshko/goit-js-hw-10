@@ -21,6 +21,10 @@ export function InfoMarkup(data) {
   };
 
 export function clearListInfo() {
+  if (elements.countryList) {
     elements.countryList.innerHTML = '';
+  };
+  if (elements.countryInfo) {
     elements.countryInfo.innerHTML = '';
-  }  
+  };
+}  

@@ -30,13 +30,19 @@ function onInputEl() {
           clearListInfo();
           elements.countryList.insertAdjacentHTML('beforeend', CountryListMarkup(data));
       } else {
-          clearListInfo();
+          
           Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+          clearListInfo();
       }        
     })
     .catch(error => {
-     
-      Notiflix.Notify.failure('Oops, there is no country with that name');
+      if (error.message === '404') {
+        Notiflix.Notify.failure('Oops, there is no country with that name');
+        elements.inputEl.value = '';
+        clearListInfo();
+        return;
+      };
+      Notiflix.Notify.warning('Oops, some unexpected error, pls. try againe 😱');
       elements.inputEl.value = '';
       clearListInfo();
     });

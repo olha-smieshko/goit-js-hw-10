@@ -25,5 +25,5 @@ export function clearListInfo() {
   };
   if (elements.countryInfo) {
     elements.countryInfo.innerHTML = '';
-  };
+  }  
 }  

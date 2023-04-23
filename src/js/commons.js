@@ -6,8 +6,7 @@ export function CountryListMarkup(data) {
     `<li class="country-item">
        <img src="${flags.svg}" alt="flag ${name.official}" width="40">
        <p>${name.official}</p>
-     </li>`
-      ).join('');
+     </li>`).join('');
   };
 
 export function InfoMarkup(data) {

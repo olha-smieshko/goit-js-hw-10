@@ -3,9 +3,10 @@ export function fetchCountries(name) {
   return fetch(`${BASE_URL}/name/${name}?fields=name,capital,languages,population,flags
 `).then(response => {
     if (!response.ok) {
+      console.log(response);
       throw new Error(response.statusText);
+      
     }
     return response.json();
   });
-      
 }

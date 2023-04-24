@@ -38,12 +38,12 @@ function onInputEl() {
     .catch(error => {
       if (error.message === '404') {
         Notiflix.Notify.failure('Oops, there is no country with that name');
-        elements.inputEl.value = '';
+        
         clearListInfo();
         return;
       };
       Notiflix.Notify.warning('Oops, some unexpected error, pls. try againe 😱');
-      elements.inputEl.value = '';
+      
       clearListInfo();
     });
 }
